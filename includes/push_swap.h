@@ -40,5 +40,8 @@ int			get_smallest(t_stack *a);
 void		tiny_sort(t_stack **a, char *instructions);
 int			quicksort(t_stack **a, t_stack **b);
 void		optimize(char *op);
+void		huge_sort(t_stack **a, t_stack **b, char *instructions);
+void			medium_sort(t_stack **a, t_stack **b, char *instructions);
+int			find_position(t_stack *s, int n);
 
 #endif
