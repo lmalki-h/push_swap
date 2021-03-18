@@ -7,7 +7,6 @@ RM := rm
 
 SRCS =			push_swap.c \
 				push_swap_utils.c \
-				quicksort.c \
 				optimize.c \
 				sort.c \
 
@@ -26,6 +25,7 @@ UTILS := 		create_node.c \
 				is_ascending.c \
 				print_stack.c \
 				is_descending.c \
+				go_to.c \
 
 SRCS += $(OPERATIONS)
 SRCS += $(UTILS)
