@@ -22,14 +22,13 @@ void	clean(char *op)
 		else if (strncmp(parser, "sa\nsa\n", 6) == 0 || 
 		strncmp(parser, "sb\nsb\n", 6) == 0 || 
 		strncmp(parser, "pa\npb\n", 6) == 0 || 
-		strncmp(op, "pb\npa\n", 6) == 0)
+		strncmp(parser, "pb\npa\n", 6) == 0)
 		{
 			*parser = '\0';
 			ft_strlcat(op, parser + 6, SIZE);
 		}
 		else
-			parser = ft_strchr(parser, '\n');
-		parser++;
+			parser = ft_strchr(parser, '\n') + 1;
 	}
 }
 
