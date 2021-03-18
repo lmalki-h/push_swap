@@ -57,9 +57,11 @@ $(LIB): $(DIR_LIB)
 
 clean:
 	$(RM) -rf $(DIR_OBJ)
+	@make clean -C $(DIR_LIB) 
 
 fclean: clean
 	$(RM) -f $(NAME)
+	@make fclean -C $(DIR_LIB) 
 
 re: fclean all
 
