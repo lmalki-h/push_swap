@@ -7,7 +7,7 @@
 # include <stdlib.h>
 # include "libft/libft.h"
 # define DEBUG 0
-# define SIZE 11500
+# define SIZE 1150000
 typedef struct s_stack
 {
 	int			n;
@@ -33,6 +33,9 @@ int			get_size(t_stack *a);
 int			is_ascending(t_stack *a);
 void    	print_stack(t_stack *a, t_stack *b);
 int			is_descending(t_stack *b);
+t_stack		*go_to(t_stack *s, int index);
+void		move_up(t_stack **s, int moves, char *instructions);
+void		move_down(t_stack **s, int index, char *instructions);
 
 //PUSH_SWAP
 int			get_biggest(t_stack *a);
@@ -41,7 +44,8 @@ void		tiny_sort(t_stack **a, char *instructions);
 int			quicksort(t_stack **a, t_stack **b);
 void		optimize(char *op);
 void		huge_sort(t_stack **a, t_stack **b, char *instructions);
-void			medium_sort(t_stack **a, t_stack **b, char *instructions);
+void		medium_sort(t_stack **a, char *instructions);
 int			find_position(t_stack *s, int n);
+void		medium_revsort(t_stack **b, char *instructions);
 
 #endif
