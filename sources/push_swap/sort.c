@@ -25,189 +25,107 @@ void	tiny_sort(t_stack **a, char *instructions)
 		swap(a);
 		ft_strlcat(instructions, "sa\n", SIZE);
 	}
-	print_stack(*a, NULL);
 }
 
-void		medium_sort(t_stack **a, t_stack **b, char *instructions)
+void	medium_sort(t_stack **a, char *instructions)
 {
-	// (void)instructions;
-	(void)b;
-	int sorted = 0;
-	int size = get_size(*a);
+	int 		index;
+	t_stack		*unsorted;
+	int			size;
+	int			sorted;
+
+	sorted = 0;
+	size = get_size(*a);
 	while (!is_ascending(*a))
 	{
-		t_stack *tmp = *a;
-		int i = 0;
-		while (i < sorted)
+		unsorted = go_to(*a, sorted);
+		index = find_position(*a, get_biggest(unsorted));
+		if (index < (size / 2))
 		{
-			tmp = tmp->next;
-			i++;
-		}						//get the smallest number from the unsorted pile
-		int smallest = get_smallest(tmp);
-		int small_pos = find_position(*a, smallest);
-
-		// printf("smallest = %i position %i\n", smallest, small_pos);
-		// printf("number sorted = %i\n", sorted);
-		// sleep(1);
-		if (small_pos != sorted && small_pos < (size / 2))
-		{
-			i = 0;
-			while (i < sorted) //on push les nombres deja triés en bas pour les preserver
-			{
-				rotate(a);
-				ft_strlcat(instructions, "ra\n", SIZE);
-
-				print_stack(*a, NULL);
-				i++;
-			}
-			i = 0;
-			while (i < small_pos - sorted)
-			{
-				rotate(a);
-				ft_strlcat(instructions, "ra\n", SIZE);
-
-				print_stack(*a, NULL);
-				i++;
-			}
-			i = 0;
-			while (i < small_pos - sorted)
-			{
-				reverse_rotate(a);
-				ft_strlcat(instructions, "rra\n", SIZE);
-				print_stack(*a, NULL);
-				if ((*a)->n > (*a)->next->n)
-				{
-							swap(a);
-							ft_strlcat(instructions, "sa\n", SIZE);
-
-				}
-				print_stack(*a, NULL);
-				i++;
-			}
-			i = 0;
-			while (i < sorted)
-			{
-				reverse_rotate(a);
-				ft_strlcat(instructions, "rra\n", SIZE);
-
-				print_stack(*a, NULL);
-				i++;
-
-			}
-			// printf("I should be back at my top\n");
-			// sleep(10);
-			print_stack(*a, NULL);
+			move_up(a, index, instructions);
 		}
-		else if (small_pos != sorted)
+		else
 		{
-			// printf("smallest is closer to bottom\n");
-			// sleep(1);
-			i = 0;
-			while (i < size - small_pos) //on push les nombres deja triés en bas pour les preserver
-			{
-				reverse_rotate(a);
-				ft_strlcat(instructions, "rra\n", SIZE);
-
-				print_stack(*a, NULL);
-				i++;
-			}
-			// printf("smallest should be at the top\n");
-			// sleep(4);
-			i = 0;
-			while (sorted && i < small_pos - sorted)
-			{
-				reverse_rotate(a);
-				ft_strlcat(instructions, "rra\n", SIZE);
-
-				print_stack(*a, NULL);
-				if ((*a)->n > (*a)->next->n)
-				{
-									swap(a);
-					ft_strlcat(instructions, "sa\n", SIZE);
-				}
-				print_stack(*a, NULL);
-				i++;
-			}
-			// printf("current number should follow sorted number\n");
-			// sleep(4);
-			i = 0;
-			while (i < sorted)
-			{
-				reverse_rotate(a);
-				ft_strlcat(instructions, "sa\n", SIZE);
-
-				print_stack(*a, NULL);
-				i++;
-			}	
-			// printf("smallest should be at the top\n");
-			// i = 0;
-			// while (i < small_pos - sorted)
-			// {
-			// 	reverse_rotate(a);
-			// 	print_stack(*a, NULL);
-			// 	if ((*a)->n > (*a)->next->n)
-			// 		swap(a);
-			// 	print_stack(*a, NULL);
-
-			// 	i++;
-			// }
-			// i = 0;
-			// while (i < sorted)
-			// {
-			// 	reverse_rotate(a);
-			// 	print_stack(*a, NULL);
-			// 	i++;
-
-			// }
-			// printf("smallest = %i was at position small_pos %i now at pos %i and %i are sorted\n", smallest, small_pos, find_position(*a, smallest), sorted);
-			// // sleep(5);
-			print_stack(*a, NULL);
+			move_down(a, index, instructions);
 		}
 		sorted++;
 	}
-
 }
 
+void	medium_revsort(t_stack **b, char *instructions)
+{
+	int 		index;
+	t_stack		*unsorted;
+	int			size;
+	int			sorted;
 
-/*
-**	A sort of reimplementation of quicksort
-*/
+	(void)instructions;
+	sorted = 0;
+	size = get_size(*b);
+	while (!is_descending(*b))
+	{
+		unsorted = go_to(*b, sorted);
+		index = find_position(*b, get_smallest(unsorted));
+		if (index < (size / 2))
+		{
+			move_up(b, index, instructions);
+		}
+		else
+		{
+			move_down(b, index, instructions);
+		}
+		sorted++;
+	}
+}
+void	smart_insert(t_stack **a, t_stack **b, char *instructions)
+{
+	while ((*a)->n > last_stack(*b)->n)
+	{
+		rotate(a);
+		ft_strlcat(instructions, "ra\n", SIZE);
+	}
+	while (*b)
+	{
+		push(b, a);
+		ft_strlcat(instructions, "pa\n", SIZE);
+	}
+}
+
 void	huge_sort(t_stack **a, t_stack **b, char *instructions)
 {
 	int i;
-	int smallest;
-	int biggest;
-	int pivot;
 	int size;
-
-	smallest = get_smallest(*a);
-	biggest = get_biggest(*a);
-	pivot = (smallest + biggest) / 2 * 1.5;
-	printf("smallest = %i biggest %i et pivot = %i\n", smallest, biggest, pivot);
-	sleep(5);
-	i = 0;
+	int pivot;
+	
 	size = get_size(*a);
-	while (get_size(*a) > size / 2)
+	pivot = (get_biggest(*a) + get_smallest(*a)) / 1.5;
+	while (!is_ascending(*a))
 	{
-		if (i < size)
+		i = 0;
+		while (i < size) //ON COMPTE LE NOMBRE D'ELEMENT SUPERIEUR A PIVOT DANS LA STACK, SI LE NOMBRE EST TROP PETIT OU TROP GRAND ON MODIFIE LE PIVOT
 		{
-			if ((*a)->n < pivot)
+			if ((*a)->n > pivot)
 			{
 				push(a, b);
 				ft_strlcat(instructions, "pb\n", SIZE);
 			}
 			else
 			{
-				rotate(a);
-				ft_strlcat(instructions, "ra\n", SIZE);
+				reverse_rotate(a);
+				ft_strlcat(instructions, "rra\n", SIZE);
 			}
 			i++;
 		}
-		else
+		if (*b)
 		{
+			size -= get_size(*b);
+			medium_revsort(b, instructions);
+			medium_sort(a, instructions);
+			smart_insert(a, b, instructions);
 			i = 0;
+			reverse_rotate(a);
+			ft_strlcat(instructions, "rra\n", SIZE);
 			pivot /= 1.5;
 		}
 	}
-	medium_sort(a, b, instructions);
 }

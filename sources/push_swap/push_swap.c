@@ -6,7 +6,7 @@ char	*push_swap(t_stack *a)
 	int		size;
 	t_stack *b;
 
-	b = (t_stack *)ft_calloc(sizeof(t_stack), 1);
+	b = NULL;
 	instructions = (char *)ft_calloc(sizeof(char), SIZE + 1);
 	if (!instructions)
 		print_error(a, "Error: malloc\n");
@@ -17,15 +17,14 @@ char	*push_swap(t_stack *a)
 		{
 			tiny_sort(&a, instructions);
 		}
-		else if (size < 50)
+		else if (size < 10)
 		{
-			medium_sort(&a, &b, instructions);
-			// print_stack(a, b);
+			printf("Needs to go vrooom vrooooooom\n");
+			// medium_sort(&a, instructions);
 		}
 		else 
 		{
 			huge_sort(&a, &b, instructions);
-			break ;
 		}
 	}
 	return (instructions);
@@ -37,16 +36,11 @@ int		main(int ac, char **av)
 	char	*instructions;
 
 	if (ac == 1)
-	{
-		write(STDERR_FILENO, "Usage: ./push_swap [DIGIT ARGUMENTS]\n", 37);
-	}
-	else
-	{
-		a = build_stack(&av[1]);
-		instructions = push_swap(a);
-		// optimize(instructions);
-		// if (instructions && !DEBUG)
-		// 	write(STDOUT_FILENO, instructions, ft_strlen(instructions));
-	}
+		print_error(NULL, "Usage: ./push_swap [DIGIT ARGUMENTS]\n");
+	a = build_stack(&av[1]);
+	instructions = push_swap(a);
+	optimize(instructions);
+	if (instructions && !DEBUG)
+		write(STDOUT_FILENO, instructions, ft_strlen(instructions));
 	return (0);
 }
