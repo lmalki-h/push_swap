@@ -28,5 +28,7 @@ int		main(int ac, char **av)
 		parse_arguments(&a, &av[1]);
 		push_swap(a);
 	}
+	if (a)
+		free_stack(a);
 	return (0);
 }
