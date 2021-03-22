@@ -2,7 +2,6 @@
 
 t_lst	*get_instructions(void)
 {
-	int		ret;
 	t_lst 	*head;
 	t_lst	*new;
 	char	*line;
@@ -10,7 +9,7 @@ t_lst	*get_instructions(void)
 	head = NULL;
 	while (1)
 	{
-		ret = get_next_line(STDIN_FILENO, &line);
+		get_next_line(STDIN_FILENO, &line);
 		if (!line)
 			break ;
 		//TODO: is valid instruction
