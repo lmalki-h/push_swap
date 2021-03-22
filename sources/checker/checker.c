@@ -32,10 +32,6 @@ int		main(int ac, char **av)
 		if (!a)
 			exit_error(NULL);
 		check(lst, a);
-		if (a)
-			free_stack(a);
-		if (lst)
-			free_lst(lst);
 	}
 	return (0);
 }
