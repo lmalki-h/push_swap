@@ -16,6 +16,8 @@ void	push_swap(t_stack *a)
 			sort_big(&a, size);
 		}
 	}
+	if (a)
+		free_stack(a);
 }
 
 int		main(int ac, char **av)
@@ -28,7 +30,7 @@ int		main(int ac, char **av)
 		parse_arguments(&a, &av[1]);
 		push_swap(a);
 	}
-	if (a)
-		free_stack(a);
+	//if (a)
+	//	free_stack(a);
 	return (0);
 }
