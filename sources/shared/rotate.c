@@ -1,9 +1,5 @@
 #include "../../includes/push_swap.h"
 
-/*
-**	Moves the first node at the bottom of the stack
-*/
-
 void	rotate(t_stack **a)
 {
 	t_stack *new_head;

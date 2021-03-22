@@ -28,4 +28,5 @@ void    print_stack(t_stack *a, t_stack *b)
         else
             printf("\n");
     }
+    sleep(1);
 }

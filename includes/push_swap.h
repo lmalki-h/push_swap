@@ -5,15 +5,25 @@
 # include <unistd.h>
 # include <limits.h>
 # include <stdlib.h>
+# include <stdbool.h>
 # include "libft/libft.h"
 # define DEBUG 0
-# define SIZE 1150000
+# define DEFAULT_SIZE 50
+# define NB_INSTRUCTIONS 11
 typedef struct s_stack
 {
 	int			n;
 	struct s_stack *next;
 }				t_stack;
 
+//SORT
+void		sort_three(t_stack **a);
+void		sort_big(t_stack **a, size_t size);
+
+//UTILS
+size_t		get_index(t_stack *s, int value);
+int			get_max(t_stack *a);
+int			get_min(t_stack *a);
 
 //OPERATIONS
 void		swap(t_stack **a);
@@ -21,31 +31,19 @@ void		rotate(t_stack **a);
 void		reverse_rotate(t_stack **a);
 void		push(t_stack **a, t_stack **b);
 
-
-//UTILS
 t_stack 	*last_stack(t_stack *head);
-t_stack 	*build_stack(char **av);
-void		print_error(t_stack *head, char *msg);
+void		parse_arguments(t_stack **head, char **av);
+void		exit_error(t_stack *head);
 t_stack		*create_node(int n);
 void		add_stack(t_stack **head, t_stack *new);
 void		free_stack(t_stack *head);
-int			get_size(t_stack *a);
-int			is_ascending(t_stack *a);
+size_t		get_size(t_stack *s);
+bool		is_increasing(t_stack *s);
 void    	print_stack(t_stack *a, t_stack *b);
-int			is_descending(t_stack *b);
-t_stack		*go_to(t_stack *s, int index);
-void		move_up(t_stack **s, int moves, char *instructions);
-void		move_down(t_stack **s, int index, char *instructions);
+bool		is_decreasing(t_stack *s);
 
-//PUSH_SWAP
-int			get_biggest(t_stack *a);
-int			get_smallest(t_stack *a);
-void		tiny_sort(t_stack **a, char *instructions);
-int			quicksort(t_stack **a, t_stack **b);
-void		optimize(char *op);
-void		huge_sort(t_stack **a, t_stack **b, char *instructions);
-void		medium_sort(t_stack **a, char *instructions);
-int			find_position(t_stack *s, int n);
-void		medium_revsort(t_stack **b, char *instructions);
+//CHECKER
+t_lst		*get_instructions(void);
+void		check(t_lst *lst, t_stack *a);
 
 #endif

@@ -1,16 +1,16 @@
 #include "../../includes/push_swap.h"
 
-int		get_size(t_stack *a)
+size_t		get_size(t_stack *s)
 {
 	t_stack *tmp;
-	int		count;
+	size_t	size;
 
-	tmp = a;
-	count = 0;
+	size = 0;
+	tmp = s;
 	while (tmp != NULL)
 	{
-		count++;
+		size++;
 		tmp = tmp->next;
 	}
-	return (count);
+	return (size);
 }

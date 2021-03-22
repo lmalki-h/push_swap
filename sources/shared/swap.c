@@ -1,9 +1,5 @@
 #include "../../includes/push_swap.h"
 
-/*
-**	Swap the value of the variable n in the first and second node
-*/
-
 void		swap(t_stack **a)
 {
 	int tmp;

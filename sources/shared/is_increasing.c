@@ -1,15 +1,15 @@
 #include "../../includes/push_swap.h"
 
-int		is_descending(t_stack *b)
+bool		is_increasing(t_stack *s)
 {
 	t_stack *tmp;
 
-	tmp = b;
+	tmp = s;
 	while (tmp->next != NULL)
 	{
-		if (tmp->n < tmp->next->n)
-			return (0);
+		if (tmp->n > tmp->next->n)
+			return (false);
 		tmp = tmp->next;
 	}
-	return (1);
+	return (true);
 }
