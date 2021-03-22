@@ -7,7 +7,7 @@ t_lst	*ft_lstnew(void *content)
 	new = (t_lst *)calloc(sizeof(t_lst), 1);
 	if (!new)
 		return (NULL);
-	new->content = strdup(content);
+	new->content = content;
 	new->next = NULL;
 	return (new);
 }
