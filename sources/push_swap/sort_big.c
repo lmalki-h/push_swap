@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_big.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lmalki-h <lmalki-h@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/23 21:37:40 by lmalki-h          #+#    #+#             */
+/*   Updated: 2021/03/23 21:38:41 by lmalki-h         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/push_swap.h"
 
-void	move_to_top(t_stack **s, size_t index)
+void			move_to_top(t_stack **s, size_t index)
 {
 	size_t size;
 
@@ -22,7 +34,8 @@ void	move_to_top(t_stack **s, size_t index)
 		}
 	}
 }
-void		move_top(t_stack **a, size_t unsorted, size_t size)
+
+void			move_top(t_stack **a, size_t unsorted, size_t size)
 {
 	size_t i;
 
@@ -45,7 +58,7 @@ void		move_top(t_stack **a, size_t unsorted, size_t size)
 	}
 }
 
-static void	divide(t_stack **src, t_stack **dst, int size, int pivot)
+static void		divide(t_stack **src, t_stack **dst, int size, int pivot)
 {
 	while (size--)
 	{
@@ -62,7 +75,7 @@ static void	divide(t_stack **src, t_stack **dst, int size, int pivot)
 	}
 }
 
-void	empty_b(t_stack **b, t_stack **a)
+void			empty_b(t_stack **b, t_stack **a)
 {
 	while (*b)
 	{
@@ -72,7 +85,7 @@ void	empty_b(t_stack **b, t_stack **a)
 	}
 }
 
-void	sort_big(t_stack **a, size_t size)
+void			sort_big(t_stack **a, size_t size)
 {
 	size_t	unsorted;
 	t_stack *b;
