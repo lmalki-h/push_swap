@@ -77,7 +77,7 @@ elif ! [[ -x "$1/checker" ]]; then
 else
 	printf "${GREEN}Testing push_swap with $TotalNbTest tests from $startRange to $endRange \n\n${NOCOLOR}" >&2
 fi
-
+TOTAL=`expr 0`
 for ((stack_size = $startRange; stack_size <= $endRange; stack_size++)); do
 	printf "${PURPLE} Generating random numbers for stack_size $stack_size...\n\n${NOCOLOR}"
   for ((testNB = 0; testNB < $TotalNbTest; testNB++)); do
@@ -101,7 +101,7 @@ for ((stack_size = $startRange; stack_size <= $endRange; stack_size++)); do
 		if (( $MOVES <= 8 )); then
 			COLOR=${WHITE}
 		elif (( $MOVES < 12 )); then
-			COLOR=${ORANGE}
+			COLOR=${GREEN}
 		else
 			COLOR=${RED}
 		fi
@@ -131,8 +131,12 @@ for ((stack_size = $startRange; stack_size <= $endRange; stack_size++)); do
 		fi
 	fi
 	printf "${COLOR} $MOVES ${NOCOLOR} instructions\n"
+	TOTAL=`expr $TOTAL + $MOVES`
   done
   printf "\n"
+  MEAN=`expr $TOTAL / $TotalNbTest `
+
+  printf "Mean: $MEAN for stack of size $stack_size \n\n"
 done
 
 rm -rf push_swap_result.txt
