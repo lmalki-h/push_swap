@@ -23,6 +23,7 @@ SRCS = 	ft_isdigit.c \
 		ft_strlcat.c \
 		ft_bzero.c \
 		ft_memset.c \
+		ft_strcmp.c \
 
 OBJS = $(SRCS:.$(EXT)=.o)
 

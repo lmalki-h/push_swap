@@ -32,5 +32,6 @@ void		*ft_calloc(size_t count, size_t size);
 void		ft_bzero(void *s, size_t n);
 void		*ft_memset(void *b, int c, size_t len);
 int			get_next_line(int fd, char **line);
+int			ft_strcmp(const char *s1, const char *s2);
 
 #endif
