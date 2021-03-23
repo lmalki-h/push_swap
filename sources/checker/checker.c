@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lmalki-h <lmalki-h@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/23 20:48:18 by lmalki-h          #+#    #+#             */
+/*   Updated: 2021/03/23 20:53:19 by lmalki-h         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/push_swap.h"
 
-static bool is_valid_instruction(char *s)
+static bool	is_valid_instruction(char *s)
 {
 	char	*instructions[NB_INSTRUCTIONS];
 	int		i;
@@ -26,9 +38,9 @@ static bool is_valid_instruction(char *s)
 	return (false);
 }
 
-static bool check_instruction(t_lst *lst)
+static bool	check_instruction(t_lst *lst)
 {
-	t_lst *tmp;
+	t_lst	*tmp;
 
 	tmp = lst;
 	while (tmp != NULL)
@@ -42,9 +54,9 @@ static bool check_instruction(t_lst *lst)
 	return (true);
 }
 
-t_lst	*get_instructions(void)
+t_lst		*get_instructions(void)
 {
-	t_lst 	*head;
+	t_lst	*head;
 	t_lst	*new;
 	char	*line;
 
@@ -60,9 +72,9 @@ t_lst	*get_instructions(void)
 	return (head);
 }
 
-int		main(int ac, char **av)
+int			main(int ac, char **av)
 {
-	t_stack *a;
+	t_stack	*a;
 	t_lst	*lst;
 
 	a = NULL;

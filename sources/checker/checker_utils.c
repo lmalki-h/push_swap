@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lmalki-h <lmalki-h@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/23 20:54:20 by lmalki-h          #+#    #+#             */
+/*   Updated: 2021/03/23 20:56:07 by lmalki-h         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/push_swap.h"
 
 static void	execute(char *op, t_stack **a, t_stack **b)
@@ -27,10 +39,10 @@ static void	execute(char *op, t_stack **a, t_stack **b)
 		op[1] != 'a' ? push(a, b) : push(b, a);
 }
 
-void	check(t_lst *lst, t_stack *a)
- {
-	t_lst *tmp;
-	t_stack *b;
+void		check(t_lst *lst, t_stack *a)
+{
+	t_lst	*tmp;
+	t_stack	*b;
 
 	b = NULL;
 	while (lst != NULL)
@@ -47,6 +59,4 @@ void	check(t_lst *lst, t_stack *a)
 		write(STDOUT_FILENO, "KO\n", 3);
 	if (a)
 		free_stack(a);
-	//if (b)
-	//	free_stack(b);
- }
+}
