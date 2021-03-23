@@ -7,8 +7,9 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include "libft/libft.h"
+
 # define DEBUG 0
-# define DEFAULT_SIZE 50
+// # define DEFAULT_SIZE 20
 # define NB_INSTRUCTIONS 11
 typedef struct s_stack
 {
@@ -19,11 +20,13 @@ typedef struct s_stack
 //SORT
 void		sort_three(t_stack **a);
 void		sort_big(t_stack **a, size_t size);
+int			get_pivot(t_stack *s, int max, size_t size);
 
 //UTILS
 size_t		get_index(t_stack *s, int value);
 int			get_max(t_stack *a);
 int			get_min(t_stack *a);
+void		push_back_sorted(t_stack **src, t_stack **dst);
 
 //OPERATIONS
 void		swap(t_stack **a);
@@ -41,9 +44,12 @@ size_t		get_size(t_stack *s);
 bool		is_increasing(t_stack *s);
 void    	print_stack(t_stack *a, t_stack *b);
 bool		is_decreasing(t_stack *s);
+void		sort_small(t_stack **a, size_t size);
+int			get_next_value(t_stack *s, int max, int size);
 
 //CHECKER
 t_lst		*get_instructions(void);
 void		check(t_lst *lst, t_stack *a);
+void		move_to_top(t_stack **s, size_t index);
 
 #endif
