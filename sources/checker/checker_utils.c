@@ -29,7 +29,7 @@ static void	execute(char *op, t_stack **a, t_stack **b)
 
 void	check(t_lst *lst, t_stack *a)
  {
-	 t_lst *tmp;
+	t_lst *tmp;
 	t_stack *b;
 
 	b = NULL;
