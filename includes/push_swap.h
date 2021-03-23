@@ -6,7 +6,7 @@
 /*   By: lmalki-h <lmalki-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 20:25:21 by lmalki-h          #+#    #+#             */
-/*   Updated: 2021/03/23 20:34:54 by lmalki-h         ###   ########.fr       */
+/*   Updated: 2021/03/23 21:28:38 by lmalki-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 # include <stdbool.h>
 # include "libft/libft.h"
 # define DEBUG 0
-# define CENT 100
-# define CINQUANTE 50
-# define VINGTCINQ 25
+# define HUNDRED 100
+# define FIFTY 50
+# define TWENTYFIVE 25
 # define NB_INSTRUCTIONS 11
 
 typedef struct			s_stack
@@ -35,7 +35,6 @@ void					swap(t_stack **a);
 void					rotate(t_stack **a);
 void					reverse_rotate(t_stack **a);
 void					push(t_stack **a, t_stack **b);
-
 void					add_last(t_stack **head, int n);
 bool					is_unique(t_stack *head, double n);
 size_t					get_size(t_stack *s);
@@ -47,20 +46,13 @@ void					free_stack(t_stack *head);
 bool					is_increasing(t_stack *s);
 void					print_stack(t_stack *a, t_stack *b);
 bool					is_decreasing(t_stack *s);
-
 size_t					get_index(t_stack *s, int value);
 int						get_max(t_stack *a);
 int						get_min(t_stack *a);
 void					sort_three(t_stack **a);
 void					sort_big(t_stack **a, size_t size);
-
 int						get_pivot(t_stack *s, size_t size);
-void					move_top(t_stack **a, size_t unsorted, size_t size);
 void					empty_b(t_stack **b, t_stack **a);
 void					sort_small(t_stack **a, size_t size);
-t_lst					*get_instructions(void);
 void					check(t_lst *lst, t_stack *a);
-void					move_to_top(t_stack **s, size_t index);
-
-
 #endif
