@@ -37,6 +37,7 @@ void	check(t_lst *lst, t_stack *a)
 	{
 		tmp = lst->next;
 		execute(lst->content, &a, &b);
+		free(lst->content);
 		free(lst);
 		lst = tmp;
 	}
@@ -46,6 +47,6 @@ void	check(t_lst *lst, t_stack *a)
 		write(STDOUT_FILENO, "KO\n", 3);
 	if (a)
 		free_stack(a);
-	if (b)
-		free_stack(b);
+	//if (b)
+	//	free_stack(b);
  }
