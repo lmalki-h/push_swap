@@ -31,6 +31,10 @@ SRCS_SHARED =		build_stack.c \
 					push.c \
 					reverse_rotate.c \
 					rotate.c \
+					add_last.c \
+					create_node.c \
+					last_stack.c \
+					is_unique.c \
 
 OBJS_PUSH_SWAP = $(addprefix $(DIR_OBJ)/, $(SRCS_PUSH_SWAP:.c=.o))
 OBJS_CHECKER = $(addprefix $(DIR_OBJ)/, $(SRCS_CHECKER:.c=.o))
