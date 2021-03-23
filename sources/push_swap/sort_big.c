@@ -1,6 +1,6 @@
 #include "../../includes/push_swap.h"
 
-static void	move_to_top(t_stack **s, size_t index)
+void	move_to_top(t_stack **s, size_t index)
 {
 	size_t size;
 
@@ -11,6 +11,7 @@ static void	move_to_top(t_stack **s, size_t index)
 		while (index--)
 		{
 			rotate(s);
+			// print_stack(NULL, *s);
 			printf("rb\n");
 		}
 	}
@@ -19,6 +20,7 @@ static void	move_to_top(t_stack **s, size_t index)
 		while (index++ < size)
 		{
 			reverse_rotate(s);
+			// print_stack(NULL, *s);
 			printf("rrb\n");
 		}
 	}
@@ -31,17 +33,19 @@ static void	divide(t_stack **src, t_stack **dst, int size,  int pivot)
 		if ((*src)->n >= pivot)
 		{
 			push(src, dst);
+			// print_stack(*src, *dst);
 			printf("pb\n");
 		}
 		else
 		{
 			rotate(src);
+			// print_stack(*src, *dst);
 			printf("ra\n");
 		}
 	}
 }
 
-static void	push_back_sorted(t_stack **src, t_stack **dst)
+void	push_back_sorted(t_stack **src, t_stack **dst)
 {
 	size_t	index;
 
@@ -50,6 +54,7 @@ static void	push_back_sorted(t_stack **src, t_stack **dst)
 		index = get_index(*src, get_max(*src));
 		move_to_top(src, index);
 		push(src, dst);
+		// print_stack(*dst, *src);
 		printf("pa\n");
 	}
 }
@@ -59,7 +64,7 @@ static void	push_back_sorted(t_stack **src, t_stack **dst)
 **	in the SIZE first element of the stack
 */
 
-static int		get_next_value(t_stack *s, int max, int size)
+int		get_next_value(t_stack *s, int max, int size)
 {
 	int 	i;
 	int		pivot;
@@ -78,15 +83,24 @@ static int		get_next_value(t_stack *s, int max, int size)
 	return (pivot);
 }
 
-static int		get_pivot(t_stack *s, int max, size_t size)
+int		get_pivot(t_stack *s, int max, size_t size)
 {
 	size_t i;
 	int pivot;
-	
+	size_t divider;
+	//TODO: faire la difference entre unsorted et size
 	i = 0;
-	if (size < DEFAULT_SIZE)
-		return (get_min(s));
-	while (i < DEFAULT_SIZE)
+	if (size > 100)
+		divider = 50;
+	else if (size > 50)
+		divider = 25;
+	else if (size > 5)
+		divider = 20;
+	else
+		divider = size / 2;
+	// if (size < divider)
+	// 	return (get_min(s));
+	while (i < divider)
 	{
 		pivot = get_next_value(s, max, size);
 		max = pivot;
@@ -106,6 +120,7 @@ void	sort_big(t_stack **a, size_t size)
 	b = NULL;
 	sorted = 0;
 	unsorted = size;
+
 	max = get_max(*a);
 	while (sorted < size)
 	{
@@ -114,6 +129,7 @@ void	sort_big(t_stack **a, size_t size)
 			while (sorted--)
 			{
 				rotate(a);
+				// print_stack(*a, b);
 				printf("ra\n");
 			}
 		}
@@ -123,6 +139,8 @@ void	sort_big(t_stack **a, size_t size)
 			while (i < unsorted)
 			{
 				reverse_rotate(a);
+				// print_stack(*a, b);
+
 				printf("rra\n");
 				i++;
 			}
