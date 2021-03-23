@@ -5,13 +5,11 @@ void	move_to_top(t_stack **s, size_t index)
 	size_t size;
 
 	size = get_size(*s);
-	//if size == 3 sort three
 	if (index < size / 2)
 	{
 		while (index--)
 		{
 			rotate(s);
-			// print_stack(NULL, *s);
 			printf("rb\n");
 		}
 	}
@@ -20,137 +18,114 @@ void	move_to_top(t_stack **s, size_t index)
 		while (index++ < size)
 		{
 			reverse_rotate(s);
-			// print_stack(NULL, *s);
 			printf("rrb\n");
 		}
 	}
 }
-
-static void	divide(t_stack **src, t_stack **dst, int size,  int pivot)
+void		move_top(t_stack **a, size_t unsorted, size_t size)
 {
-	while (size--) //get_size(*dst) < DEFAULT_SIZE &&
+	size_t i;
+
+	i = 0;
+	if (unsorted < size / 2)
 	{
-		if ((*src)->n >= pivot)
+		while (i++ < unsorted)
 		{
-			push(src, dst);
-			// print_stack(*src, *dst);
-			printf("pb\n");
+			reverse_rotate(a);
+			printf("rra\n");
 		}
-		else
+	}
+	else
+	{
+		while (unsorted + i++ < size)
 		{
-			rotate(src);
-			// print_stack(*src, *dst);
+			rotate(a);
 			printf("ra\n");
 		}
 	}
 }
 
-void	push_back_sorted(t_stack **src, t_stack **dst)
+static void	divide(t_stack **src, t_stack **dst, int size, int pivot)
 {
-	size_t	index;
-
-	while (*src)
+	while (size--)
 	{
-		index = get_index(*src, get_max(*src));
-		move_to_top(src, index);
-		push(src, dst);
-		// print_stack(*dst, *src);
+		if ((*src)->n >= pivot)
+		{
+			push(src, dst);
+			printf("pb\n");
+		}
+		else
+		{
+			rotate(src);
+			printf("ra\n");
+		}
+	}
+}
+
+void	empty_b(t_stack **b, t_stack **a)
+{
+	while (*b)
+	{
+		move_to_top(b, get_index(*b, get_max(*b)));
+		push(b, a);
 		printf("pa\n");
 	}
 }
 
-/*
-**	Returns for the next biggest number (after max) 
-**	in the SIZE first element of the stack
-*/
-
-int		get_next_value(t_stack *s, int max, int size)
+void		down_to_pivot(t_stack *s, int *limit, size_t size)
 {
-	int 	i;
+	t_stack *tmp;
 	int		pivot;
-	t_stack	*tmp;
 
-	i = 0;
 	tmp = s;
 	pivot = get_min(s);
-	while (i < size)
+	while (size--)
 	{
-		if (tmp->n > pivot && tmp->n < max)
+		if (tmp->n > pivot && tmp->n < *limit)
 			pivot = tmp->n;
 		tmp = tmp->next;
-		i++;
 	}
-	return (pivot);
+	*limit = pivot;
 }
 
-int		get_pivot(t_stack *s, int max, size_t size)
+int		get_divider(size_t size)
 {
-	size_t i;
-	int pivot;
-	size_t divider;
-	//TODO: faire la difference entre unsorted et size
-	i = 0;
-	if (size > 100)
-		divider = 50;
-	else if (size > 50)
-		divider = 25;
-	else if (size > 5)
-		divider = 20;
+	if (size > CENT)
+		return (CINQUANTE);
+	else if (size > CINQUANTE)
+		return (VINGTCINQ);
+	else if (size < 6)
+		return (size / 2);
 	else
-		divider = size / 2;
-	// if (size < divider)
-	// 	return (get_min(s));
-	while (i < divider)
-	{
-		pivot = get_next_value(s, max, size);
-		max = pivot;
-		i++;
-	}
+		return (1);
+}
+
+int		get_pivot(t_stack *s, size_t size)
+{
+	int			divider;
+	int			pivot;
+
+	divider = get_divider(size);
+	if (divider == 1)
+		return (get_min(s));
+	pivot = get_max(s);
+	while (divider--)
+		down_to_pivot(s, &pivot, size);
 	return (pivot);
 }
 
 void	sort_big(t_stack **a, size_t size)
 {
-	size_t 	sorted;
 	size_t	unsorted;
-	int 	pivot;
-	int		max;
 	t_stack *b;
 
 	b = NULL;
-	sorted = 0;
 	unsorted = size;
-
-	max = get_max(*a);
-	while (sorted < size)
+	while (unsorted)
 	{
-		if (sorted < size / 2)
-		{
-			while (sorted--)
-			{
-				rotate(a);
-				// print_stack(*a, b);
-				printf("ra\n");
-			}
-		}
-		else
-		{
-			size_t i = 0;
-			while (i < unsorted)
-			{
-				reverse_rotate(a);
-				// print_stack(*a, b);
-
-				printf("rra\n");
-				i++;
-			}
-		}
-		pivot = get_pivot(*a, max, unsorted);
-		max = pivot;
-		divide(a, &b, unsorted, pivot);
+		move_top(a, unsorted, size);
+		divide(a, &b, unsorted, get_pivot(*a, unsorted));
 		unsorted -= get_size(b);
-		sorted = size - unsorted;
-		//TODO: before push back bring sorted to the top
-		push_back_sorted(&b, a);
+		empty_b(&b, a);
 	}
 }
