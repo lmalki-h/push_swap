@@ -1,6 +1,8 @@
 PUSH_SWAP = push_swap
 CHECKER = checker
+TESTER = tester
 
+SH = sh
 EXT = c
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
@@ -34,6 +36,7 @@ OBJS_CHECKER = $(addprefix $(DIR_OBJ)/, $(SRCS_CHECKER:.c=.o))
 OBJS_SHARED = $(addprefix $(DIR_OBJ)/, $(SRCS_SHARED:.c=.o))
 
 DIR_SRC = sources
+DIR_TESTER = $(DIR_SRC)/tester
 DIR_PUSH_SWAP = $(DIR_SRC)/push_swap
 DIR_CHECKER = $(DIR_SRC)/checker
 DIR_SHARED = $(DIR_SRC)/shared
@@ -60,6 +63,12 @@ $(DIR_OBJ)/%.o: %.c
 
 $(LIB): $(DIR_LIB)
 	@make -C $(DIR_LIB)
+
+test_100: all
+	$(SH) $(DIR_TESTER)/$(TESTER).$(SH) . 100 100
+
+test_500: all
+	$(SH) $(DIR_TESTER)/$(TESTER).$(SH) . 500 100
 
 clean:
 	$(RM) $(RF) $(DIR_OBJ)
