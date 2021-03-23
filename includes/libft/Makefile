@@ -24,6 +24,7 @@ SRCS = 	ft_isdigit.c \
 		ft_bzero.c \
 		ft_memset.c \
 		ft_strcmp.c \
+		atod.c \
 
 OBJS = $(SRCS:.$(EXT)=.o)
 
