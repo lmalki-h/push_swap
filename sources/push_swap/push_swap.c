@@ -11,6 +11,10 @@ void	push_swap(t_stack *a)
 		{
 			sort_three(&a);
 		}
+		else if (size < 6)
+		{
+			sort_small(&a, size);
+		}
 		else
 		{
 			sort_big(&a, size);
