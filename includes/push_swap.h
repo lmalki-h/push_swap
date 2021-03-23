@@ -9,7 +9,10 @@
 # include "libft/libft.h"
 
 # define DEBUG 0
-// # define DEFAULT_SIZE 20
+# define CENT 100
+# define CINQUANTE 50
+# define VINGTCINQ 25
+
 # define NB_INSTRUCTIONS 11
 typedef struct s_stack
 {
@@ -20,7 +23,9 @@ typedef struct s_stack
 //SORT
 void		sort_three(t_stack **a);
 void		sort_big(t_stack **a, size_t size);
-int			get_pivot(t_stack *s, int max, size_t size);
+int			get_pivot(t_stack *s, size_t size);
+void		move_top(t_stack **a, size_t unsorted, size_t size);
+void		empty_b(t_stack **b, t_stack **a);
 
 //UTILS
 size_t		get_index(t_stack *s, int value);
@@ -45,11 +50,14 @@ bool		is_increasing(t_stack *s);
 void    	print_stack(t_stack *a, t_stack *b);
 bool		is_decreasing(t_stack *s);
 void		sort_small(t_stack **a, size_t size);
-int			get_next_value(t_stack *s, int max, int size);
+void			get_next_value(t_stack *s, int *pivot, int size);
 
 //CHECKER
 t_lst		*get_instructions(void);
 void		check(t_lst *lst, t_stack *a);
 void		move_to_top(t_stack **s, size_t index);
+t_stack		*last_stack(t_stack *head);
+void		add_last(t_stack **head, int n);
+bool		is_unique(t_stack *head, double n);
 
 #endif
