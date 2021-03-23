@@ -69,15 +69,15 @@ int		main(int ac, char **av)
 	if (ac > 1)
 	{
 		parse_arguments(&a, &av[1]);
+		if (!a)
+		{
+			exit_error(NULL);
+		}
 		lst = get_instructions();
 		if (!check_instruction(lst))
 		{
 			free_lst(lst);
 			exit_error(a);
-		}
-		if (!a)
-		{
-			exit_error(NULL);
 		}
 		check(lst, a);
 	}
