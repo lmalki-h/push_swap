@@ -6,6 +6,7 @@ void	free_lst(t_lst *head)
 	while (head != NULL)
 	{
 		tmp = head->next;
+		free(head->content);
 		free(head);
 		head = tmp;
 	}
