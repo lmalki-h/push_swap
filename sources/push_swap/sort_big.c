@@ -72,48 +72,6 @@ void	empty_b(t_stack **b, t_stack **a)
 	}
 }
 
-void		down_to_pivot(t_stack *s, int *limit, size_t size)
-{
-	t_stack *tmp;
-	int		pivot;
-
-	tmp = s;
-	pivot = get_min(s);
-	while (size--)
-	{
-		if (tmp->n > pivot && tmp->n < *limit)
-			pivot = tmp->n;
-		tmp = tmp->next;
-	}
-	*limit = pivot;
-}
-
-int		get_divider(size_t size)
-{
-	if (size > CENT)
-		return (CINQUANTE);
-	else if (size > CINQUANTE)
-		return (VINGTCINQ);
-	else if (size < 6)
-		return (size / 2);
-	else
-		return (1);
-}
-
-int		get_pivot(t_stack *s, size_t size)
-{
-	int			divider;
-	int			pivot;
-
-	divider = get_divider(size);
-	if (divider == 1)
-		return (get_min(s));
-	pivot = get_max(s);
-	while (divider--)
-		down_to_pivot(s, &pivot, size);
-	return (pivot);
-}
-
 void	sort_big(t_stack **a, size_t size)
 {
 	size_t	unsorted;

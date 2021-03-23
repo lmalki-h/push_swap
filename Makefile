@@ -16,6 +16,7 @@ SRCS_PUSH_SWAP =	push_swap.c \
 					sort_big.c \
 					sort_three.c \
 					sort_small.c \
+					get_pivot.c \
 
 SRCS_CHECKER =		checker.c \
 					checker_utils.c \
