@@ -6,7 +6,7 @@
 /*   By: lmalki-h <lmalki-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 21:24:55 by lmalki-h          #+#    #+#             */
-/*   Updated: 2021/03/24 08:55:08 by lmalki-h         ###   ########.fr       */
+/*   Updated: 2021/03/24 09:38:08 by lmalki-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	get_divider(size_t size)
 		return (FIFTY);
 	else if (size > FIFTY)
 		return (TWENTYFIVE);
-	else if (size < 6)
+	else if (size > 6)
 		return (size / 2);
 	else
 		return (size);
