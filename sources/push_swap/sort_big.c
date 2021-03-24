@@ -6,7 +6,7 @@
 /*   By: lmalki-h <lmalki-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 21:37:40 by lmalki-h          #+#    #+#             */
-/*   Updated: 2021/03/24 08:47:57 by lmalki-h         ###   ########.fr       */
+/*   Updated: 2021/03/24 09:20:01 by lmalki-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void			sort_big(t_stack **a, size_t size)
 	while (unsorted && nb_of_sub_stacks--)
 	{
 		//WITHIN THE LOOP SORTS ONE SUB_STACK
-		move_top(a, unsorted, size);
+		move_top(a, nb_of_sub_stacks * size_sub_stack, size);
 		divide(a, &b, unsorted, size_sub_stack);
 		unsorted -= get_size(b);
 		empty_b(&b, a);
