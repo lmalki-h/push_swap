@@ -17,6 +17,7 @@ SRCS_PUSH_SWAP =	push_swap.c \
 					sort_three.c \
 					sort_small.c \
 					get_pivot.c \
+					get_divider.c \
 
 SRCS_CHECKER =		checker.c \
 					checker_utils.c \
@@ -69,6 +70,12 @@ $(DIR_OBJ)/%.o: %.c
 
 $(LIB): $(DIR_LIB)
 	@make -C $(DIR_LIB)
+
+test_3: all
+	$(SH) $(DIR_TESTER)/$(TESTER).$(SH) . 3 100
+
+test_5: all
+	$(SH) $(DIR_TESTER)/$(TESTER).$(SH) . 5 100
 
 test_100: all
 	$(SH) $(DIR_TESTER)/$(TESTER).$(SH) . 100 100
