@@ -27,7 +27,6 @@ SRCS_SHARED =		build_stack.c \
 					free_stack.c \
 					get_size.c \
 					is_increasing.c \
-					print_stack.c \
 					is_decreasing.c \
 					swap.c \
 					push.c \
