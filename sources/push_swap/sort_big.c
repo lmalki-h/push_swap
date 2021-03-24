@@ -17,7 +17,9 @@ void			move_top(t_stack **s, size_t index)
 	size_t size;
 
 	size = get_size(*s);
-	if (index < size / 2)
+	if (index == 0)
+		;
+	else if (index < size / 2)
 	{
 		while (index--)
 		{

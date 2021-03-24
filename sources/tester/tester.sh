@@ -24,7 +24,7 @@ LIGHTPURPLE='\033[1;35m'
 LIGHTCYAN='\033[1;36m'
 WHITE='\033[1;37m'
 
-if [ $# -ne 3 ]; then
+if [[ $# -ne 3 ]]; then
     printf "Usage: visualise.sh [directory-to-push_swap] [stacksize 0R range] [nb_of_test]\n" >&2
     exit -1
 fi
@@ -98,8 +98,10 @@ for ((stack_size = $startRange; stack_size <= $endRange; stack_size++)); do
 			COLOR=${RED}
 		fi
 	elif (( $stack_size <= 5 )) ; then
-		if (( $MOVES <= 8 )); then
+		if (( $MOVES < 8 )); then
 			COLOR=${WHITE}
+		elif (( $MOVES == 8 )); then
+			COLOR=${BLUE}
 		elif (( $MOVES < 12 )); then
 			COLOR=${GREEN}
 		else

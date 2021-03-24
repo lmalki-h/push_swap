@@ -45,13 +45,11 @@ void		check(t_lst *lst, t_stack *a)
 	t_stack	*b;
 
 	b = NULL;
-	while (lst != NULL)
+	tmp = lst;
+	while (tmp != NULL)
 	{
-		tmp = lst->next;
-		execute(lst->content, &a, &b);
-		free(lst->content);
-		free(lst);
-		lst = tmp;
+		execute(tmp->content, &a, &b);
+		tmp = tmp->next;
 	}
 	if (is_increasing(a) && !b)
 		write(STDOUT_FILENO, "OK\n", 3);
@@ -59,4 +57,6 @@ void		check(t_lst *lst, t_stack *a)
 		write(STDOUT_FILENO, "KO\n", 3);
 	if (a)
 		free_stack(a);
+	if (lst)
+		free_lst(lst);
 }

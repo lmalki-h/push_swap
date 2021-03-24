@@ -2,6 +2,7 @@ PUSH_SWAP = push_swap
 CHECKER = checker
 TESTER = tester
 
+BASH = bash
 SH = sh
 EXT = c
 CC = gcc
@@ -71,16 +72,16 @@ $(LIB): $(DIR_LIB)
 	@make -C $(DIR_LIB)
 
 test_3: all
-	$(SH) $(DIR_TESTER)/$(TESTER).$(SH) . 3 100
+	$(BASH) $(DIR_TESTER)/$(TESTER).$(SH) . 3 100
 
 test_5: all
-	$(SH) $(DIR_TESTER)/$(TESTER).$(SH) . 5 100
+	$(BASH) $(DIR_TESTER)/$(TESTER).$(SH) . 5 100
 
 test_100: all
-	$(SH) $(DIR_TESTER)/$(TESTER).$(SH) . 100 100
+	$(BASH) $(DIR_TESTER)/$(TESTER).$(SH) . 100 100
 
 test_500: all
-	$(SH) $(DIR_TESTER)/$(TESTER).$(SH) . 500 100
+	$(BASH) $(DIR_TESTER)/$(TESTER).$(SH) . 500 100
 
 clean:
 	$(RM) $(RF) $(DIR_OBJ)
