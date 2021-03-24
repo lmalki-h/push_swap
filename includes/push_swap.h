@@ -6,7 +6,7 @@
 /*   By: lmalki-h <lmalki-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 20:25:21 by lmalki-h          #+#    #+#             */
-/*   Updated: 2021/03/23 21:28:38 by lmalki-h         ###   ########.fr       */
+/*   Updated: 2021/03/24 09:24:42 by lmalki-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,6 @@ int						get_pivot(t_stack *s, size_t size);
 void					empty_b(t_stack **b, t_stack **a);
 void					sort_small(t_stack **a, size_t size);
 void					check(t_lst *lst, t_stack *a);
+int						get_divider(size_t size);
+
 #endif
