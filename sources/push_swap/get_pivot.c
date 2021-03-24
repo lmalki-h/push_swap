@@ -6,20 +6,20 @@
 /*   By: lmalki-h <lmalki-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 21:24:55 by lmalki-h          #+#    #+#             */
-/*   Updated: 2021/03/23 21:36:59 by lmalki-h         ###   ########.fr       */
+/*   Updated: 2021/03/24 08:55:08 by lmalki-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-static void	down_to_pivot(t_stack *s, int *limit, size_t size)
+static void	down_to_pivot(t_stack *s, int *limit, size_t unsorted)
 {
 	t_stack	*tmp;
 	int		pivot;
 
 	tmp = s;
 	pivot = get_min(s);
-	while (size--)
+	while (unsorted--)
 	{
 		if (tmp->n > pivot && tmp->n < *limit)
 			pivot = tmp->n;
@@ -28,7 +28,7 @@ static void	down_to_pivot(t_stack *s, int *limit, size_t size)
 	*limit = pivot;
 }
 
-static int	get_divider(size_t size)
+int	get_divider(size_t size)
 {
 	if (size > HUNDRED)
 		return (FIFTY);
@@ -37,19 +37,19 @@ static int	get_divider(size_t size)
 	else if (size < 6)
 		return (size / 2);
 	else
-		return (1);
+		return (size);
 }
 
-int			get_pivot(t_stack *s, size_t size)
+int			get_pivot(t_stack *s, size_t unsorted)
 {
 	int		divider;
 	int		pivot;
 
-	divider = get_divider(size);
-	if (divider == 1)
-		return (get_min(s));
+	divider = get_divider(unsorted);
+	// if (divider == 1)
+	// 	return (get_min(s));
 	pivot = get_max(s);
 	while (divider--)
-		down_to_pivot(s, &pivot, size);
+		down_to_pivot(s, &pivot, unsorted);
 	return (pivot);
 }

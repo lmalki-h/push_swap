@@ -6,7 +6,7 @@
 /*   By: lmalki-h <lmalki-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 21:37:40 by lmalki-h          #+#    #+#             */
-/*   Updated: 2021/03/23 21:38:41 by lmalki-h         ###   ########.fr       */
+/*   Updated: 2021/03/24 08:47:57 by lmalki-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,21 @@ void			move_top(t_stack **a, size_t unsorted, size_t size)
 	}
 }
 
-static void		divide(t_stack **src, t_stack **dst, int size, int pivot)
+static void		divide(t_stack **a, t_stack **b, size_t unsorted, size_t size_sub_stack)
 {
-	while (size--)
+	int pivot;
+
+	pivot = get_pivot(*a, unsorted);
+	while (unsorted-- && get_size(*b) < size_sub_stack)
 	{
-		if ((*src)->n >= pivot)
+		if ((*a)->n >= pivot)
 		{
-			push(src, dst);
+			push(a, b);
 			printf("pb\n");
 		}
 		else
 		{
-			rotate(src);
+			rotate(a);
 			printf("ra\n");
 		}
 	}
@@ -87,16 +90,63 @@ void			empty_b(t_stack **b, t_stack **a)
 
 void			sort_big(t_stack **a, size_t size)
 {
+	size_t 	size_sub_stack;
+	size_t	nb_of_sub_stacks;
+
 	size_t	unsorted;
 	t_stack *b;
 
 	b = NULL;
+	size_sub_stack = get_divider(size);
+	nb_of_sub_stacks = size / size_sub_stack;
 	unsorted = size;
-	while (unsorted)
+	while (unsorted && nb_of_sub_stacks--)
 	{
+		//WITHIN THE LOOP SORTS ONE SUB_STACK
 		move_top(a, unsorted, size);
-		divide(a, &b, unsorted, get_pivot(*a, unsorted));
+		divide(a, &b, unsorted, size_sub_stack);
 		unsorted -= get_size(b);
 		empty_b(&b, a);
 	}
 }
+
+// int			get_pivot(t_stack **a, size_t size_b, size_t size_a)
+// {
+// 	t_stack *tmp;
+// 	size_t	i;
+// 	int 	pivot;
+// 	int		limit;
+
+// 	limit = get_max(*a);
+// 	while (size_b--)
+// 	{
+// 		i = 0;
+// 		tmp = *a;
+// 		pivot = tmp->n;
+// 		while (i++ < size_a)
+// 		{
+// 			if (tmp->n > pivot && pivot < limit) 
+// 				pivot = tmp->n;
+// 			tmp = tmp->next;
+// 		}
+// 		limit = pivot;
+// 	}
+// 	return (pivot);
+// }
+// void		push_pre_sorted(t_stack **a, t_stack **b, size_t size)
+// {
+// 	int 	pivot;
+
+// 	pivot = get_pivot(a, size_sub_stack, size); 
+// }
+// void		sort_big(t_stack **a, size_t size)
+// {
+// 	size_t		size_sub_stack;
+// 	size_t		nb_of_splits;
+
+// 	while (nb_of_splits--)
+// 	{
+// 		//push_pre_sorted
+// 		//push_back_sorted
+// 	}
+// }
