@@ -6,7 +6,7 @@
 /*   By: lmalki-h <lmalki-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 21:37:40 by lmalki-h          #+#    #+#             */
-/*   Updated: 2021/03/24 11:06:33 by lmalki-h         ###   ########.fr       */
+/*   Updated: 2021/03/24 12:27:55 by lmalki-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void			move_top(t_stack **s, size_t index)
 void			move_sorted_down(t_stack **a, size_t unsorted)
 {
 	size_t size;
+
 	size = get_size(*a);
 	if (unsorted < size / 2)
 	{
@@ -57,7 +58,8 @@ void			move_sorted_down(t_stack **a, size_t unsorted)
 	}
 }
 
-static void		push_some_unsorted_to_b(t_stack **a, t_stack **b, size_t unsorted, size_t divider)
+static void		push_some_unsorted_to_b(t_stack **a, t_stack **b,
+					size_t unsorted, size_t divider)
 {
 	int pivot;
 
@@ -89,7 +91,7 @@ void			push_back_sorted(t_stack **dst, t_stack **src)
 
 void			sort_big(t_stack **a, size_t size)
 {
-	int 	divider;
+	int		divider;
 	size_t	unsorted;
 	t_stack *b;
 
