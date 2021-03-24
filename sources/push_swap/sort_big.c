@@ -6,7 +6,7 @@
 /*   By: lmalki-h <lmalki-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 21:37:40 by lmalki-h          #+#    #+#             */
-/*   Updated: 2021/03/24 09:20:01 by lmalki-h         ###   ########.fr       */
+/*   Updated: 2021/03/24 10:01:50 by lmalki-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,13 @@ void			move_to_top(t_stack **s, size_t index)
 	}
 }
 
-void			move_top(t_stack **a, size_t unsorted, size_t size)
+void			move_top(t_stack **a, size_t unsorted)
 {
-	size_t i;
-
-	i = 0;
+	size_t size;
+	size = get_size(*a);
 	if (unsorted < size / 2)
 	{
-		while (i++ < unsorted)
+		while (unsorted--)
 		{
 			reverse_rotate(a);
 			printf("rra\n");
@@ -50,20 +49,19 @@ void			move_top(t_stack **a, size_t unsorted, size_t size)
 	}
 	else
 	{
-		while (unsorted + i++ < size)
+		while (unsorted++ < size)
 		{
 			rotate(a);
 			printf("ra\n");
 		}
 	}
 }
-
-static void		divide(t_stack **a, t_stack **b, size_t unsorted, size_t size_sub_stack)
+static void		divide(t_stack **a, t_stack **b, size_t unsorted)
 {
 	int pivot;
 
 	pivot = get_pivot(*a, unsorted);
-	while (unsorted-- && get_size(*b) < size_sub_stack)
+	while (unsorted--)
 	{
 		if ((*a)->n >= pivot)
 		{
@@ -77,6 +75,47 @@ static void		divide(t_stack **a, t_stack **b, size_t unsorted, size_t size_sub_s
 		}
 	}
 }
+void			divide_bis(t_stack **a, t_stack **b, size_t unsorted)
+{
+	size_t size;
+	int		pivot;
+	pivot = get_pivot(*a, unsorted);
+	size = get_size(*a);
+	size_t i;
+	if (unsorted < size / 2)
+	{
+		i = unsorted;
+		while (i--)
+		{
+			reverse_rotate(a);
+			printf("rra\n");
+			if ((*a)->n >= pivot)
+		{
+			push(a, b);
+			printf("pb\n");
+		}
+
+		}
+		
+		// unsorted -= get_size(*b);
+		// while (unsorted--)
+		// {
+		// 	rotate(a);
+		// 	printf("ra\n");
+		// }
+	}
+	else
+	{
+		i = unsorted;
+		while (i++ < size)
+		{
+			rotate(a);
+			printf("ra\n");
+		}
+		divide(a, b, unsorted);
+	}
+}
+
 
 void			empty_b(t_stack **b, t_stack **a)
 {
@@ -100,11 +139,16 @@ void			sort_big(t_stack **a, size_t size)
 	size_sub_stack = get_divider(size);
 	nb_of_sub_stacks = size / size_sub_stack;
 	unsorted = size;
-	while (unsorted && nb_of_sub_stacks--)
+	while (unsorted)
 	{
 		//WITHIN THE LOOP SORTS ONE SUB_STACK
-		move_top(a, nb_of_sub_stacks * size_sub_stack, size);
-		divide(a, &b, unsorted, size_sub_stack);
+		// printf("start of move_top de a unsorted = %zu\n", unsorted);
+		// sleep(3);
+		// move_top(a, unsorted);
+		divide_bis(a, &b, unsorted);
+		// printf("end of move_top de a unsorted = %zu\n", unsorted);
+		// sleep(3);
+		// divide(a, &b, unsorted);
 		unsorted -= get_size(b);
 		empty_b(&b, a);
 	}
